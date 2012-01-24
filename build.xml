@@ -1,0 +1,32 @@
+<project name="picturemgt" basedir="." default="createjar" >
+	<property name="build" value="build"/>
+	<property name="extlibs" value="extlibs"/>
+	<property name="mainclass" value="ro.cuzma.picturemgt.ui.RunMe"/>
+	<target name="clean">
+		<delete dir="${build}"/>
+	</target>
+	<target name="init" depends="clean">
+		<mkdir dir="${build}"/>
+	</target>
+	<target name="copylibs">
+		<copy  file="${extlibs}/jpeglib.jar" todir="${build}"/>
+		<copy  file="${extlibs}/log4j-1.2.14.jar" todir="${build}"/>
+		<copy  file="${extlibs}/tools.jar" todir="${build}"/>
+		<copy  file="${extlibs}/xmplib.jar" todir="${build}"/>
+		<copy  file="newDB.xml" todir="${build}"/>
+		<copy  file="init.cfg" todir="${build}"/>
+	</target>
+
+		<target name="createjar" depends="init,copylibs">
+		<mkdir dir="build" />
+		<jar destfile="${build}/${ant.project.name}.jar">
+		    <fileset dir="./bin"
+		             excludes="build.xml"
+		    />
+ 			<manifest>
+ 				<attribute name="Class-Path" value="jpeglib.jar log4j-1.2.14.jar tools.jar xmplib.jar"/>
+                <attribute name="Main-Class" value="${mainclass}"/>
+            </manifest>
+		 </jar>
+	</target>
+</project>
