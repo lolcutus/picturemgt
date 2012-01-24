@@ -23,6 +23,10 @@ import javax.swing.JTextField;
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class ChangeRoot extends javax.swing.JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel		jPanelMain;
 	private JTextField	jTextFieldRoot;
 	private JLabel		jLabelRoot;
