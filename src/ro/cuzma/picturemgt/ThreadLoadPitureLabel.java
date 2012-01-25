@@ -88,8 +88,8 @@ public class ThreadLoadPitureLabel extends Thread {
             Hashtable thPic = new Hashtable();
             if (this.myPics.size() > 0) {
                 tmp = (PictureLabel) this.myPics.get(0);
-                File tmpFi = new File(tmp.getPic().getRoot() + "\\" + tmp.getPic().getPath()
-                        + "\\db.th");
+                File tmpFi = new File(tmp.getPic().getFilePath()
+                        + File.separator + "db.th");
                 if (tmpFi.exists()) {
                     RandomAccessFile rw;
                     try {
@@ -111,8 +111,7 @@ public class ThreadLoadPitureLabel extends Thread {
                 tmp = (PictureLabel) this.myPics.get(i);
                 byte[] arr = tmp.getPic().getThumbsPic();
                 if (arr == null) {
-                    arr = (byte[]) thPic.get(tmp.getPic().getRoot() + "\\" + tmp.getPic().getPath()
-                            + "\\" + tmp.getPic().getName());
+                    arr = (byte[]) thPic.get(tmp.getPic().getFileFullName());
                     if (arr == null) {
                         saveTh = true;
                         arr = tmp.getPic().generateThumbsPic();
@@ -135,8 +134,7 @@ public class ThreadLoadPitureLabel extends Thread {
             }
             if (saveTh) {
                 tmp = (PictureLabel) this.myPics.get(0);
-                File tmpF = new File(tmp.getPic().getRoot() + File.separator
-                        + tmp.getPic().getPath() + File.separator + "db.th");
+                File tmpF = new File(tmp.getPic().getFilePath()+ File.separator + "db.th");
                 if (!tmpF.exists()) {
                     try {
                         tmpF.createNewFile();

@@ -1041,9 +1041,7 @@ public class PictureManagement extends JFrame {
     private void previewLabelMouseReleased(MouseEvent evt) {
         if (this.currentPicture != null) {
             // System.out.println("in");
-            String ecmd = this.currentPicture.getRoot() + File.separator
-                    + this.currentPicture.getPath() + File.separator
-                    + this.currentPicture.getName();
+            String ecmd = this.currentPicture.getFileFullName();
             String[] cmd = { "cmd.exe", "/C", ecmd };
             final Process process;
             try {

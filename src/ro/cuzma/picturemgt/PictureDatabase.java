@@ -334,8 +334,7 @@ public class PictureDatabase {
         boolean addPath = true;
         for (int i = 0; i < this.pictures.size(); i++) {
             ra.writeBytes(((Picture) this.pictures.get(i)).toACDSee());
-            path = ((Picture) this.pictures.get(i)).getRoot() + File.separatorChar
-                    + ((Picture) this.pictures.get(i)).getPath();
+            path = ((Picture) this.pictures.get(i)).getFilePath();
             // path = ((Picture) this.pictures.get(i)).getPath();
             addPath = true;
             for (int j = 0; j < tmpV.size(); j++) {
@@ -408,7 +407,7 @@ public class PictureDatabase {
         String picPath;
         for (int i = 0; i < this.pictures.size(); i++) {
             tmpPic = (Picture) this.pictures.get(i);
-            picPath = tmpPic.getRoot() + "\\" + tmpPic.getPath();
+            picPath = tmpPic.getFilePath();
             // System.out.println(picFolder + "<->" + picPath);
             if (picPath.startsWith(picFolder)) {
                 ra.writeBytes(tmpPic.toACDSee());
@@ -464,7 +463,7 @@ public class PictureDatabase {
             while (remove) {
                 if (i < this.pictures.size()) {
                     tmpPic = (Picture) this.pictures.get(i);
-                    picPath = tmpPic.getRoot() + "\\" + tmpPic.getPath();
+                    picPath = tmpPic.getFilePath();
                     // System.out.println(path +"<->" + picPath);
                     if (picPath.equals(path)) {
                         System.out.println("Remove: " + tmpPic.getName());
@@ -550,7 +549,7 @@ public class PictureDatabase {
         logger.debug("Path to set: " + path);
         for (int i = 0; i < this.getPictures().size(); i++) {
             pic = this.getPictures().get(i);
-            picPath = pic.getFullName();
+            picPath = pic.getFileFullName();
             if (picPath.startsWith(path)) {
                 logger.debug("Picture path: " + picPath);
                 pic.saveWithXMP();

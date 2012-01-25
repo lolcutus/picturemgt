@@ -25,10 +25,13 @@ public class RunMe {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		RunMe app = new RunMe();
+		RunMe app = new RunMe(args[0]);
 	}
 
-	public RunMe() {
+	public RunMe(String initFileName) {
+		if(initFileName != null && !initFileName.isEmpty()){
+			initFile = initFileName;
+		}
 		initApp();
 		logger.debug("App initialized");
 		logger.info("Start UI");

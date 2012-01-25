@@ -58,7 +58,7 @@ public class FoldersNode {
         String path = pic.getPath();
         // System.out.println(path);
         if (path != null) {
-            StringTokenizer st = new StringTokenizer(path, File.separator);
+            StringTokenizer st = new StringTokenizer(path, Picture.FILE_PATH_SEPARATOR);
             while (st.hasMoreTokens()) {
                 String temp = st.nextToken();
                 // System.out.println(temp);

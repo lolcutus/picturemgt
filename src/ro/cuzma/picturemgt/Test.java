@@ -30,13 +30,13 @@ public class Test {
 				Picture tmp = (Picture)picDB.getPictures().get(11700);
 				//tmp.getKeywords()
 				Category tmpC = null;
-				System.out.println(tmp.getFullName() + "-" + tmp.getRating());
+				System.out.println(tmp.getFileFullName() + "-" + tmp.getRating());
 				for(int i = 0;i< tmp.getKeywords().size();i++){
 					tmpC = (Category) tmp.getKeywords().get(i);
 					System.out.println(tmpC.getFullName() + "-" + tmpC.getName());
 				}
 				try {
-					JpegPicture jpeg = new JpegPicture(tmp.getFullName());
+					JpegPicture jpeg = new JpegPicture(tmp.getFileFullName());
 					// xmpTest.readfromAPP1(picture.getXMPdata());
 					XMPManager xm = new XMPManager(jpeg);
 					XMPSchemaBasic tmpX = xm.getXmpXML().getBasicSchema();

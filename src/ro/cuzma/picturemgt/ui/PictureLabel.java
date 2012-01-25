@@ -88,7 +88,7 @@ public class PictureLabel extends JLabel implements MouseListener, FocusListener
 		}
 		this.parent.setCurPiclabel(this);
 		this.parent.getTextArea().setText("");
-		this.parent.getTextArea().append(pic.getRoot() + File.separator + pic.getPath() + File.separator + pic.getName() + "\n");
+		this.parent.getTextArea().append(pic.getFileFullName() + "\n");
 		this.parent.setCurrentPicture(pic);
 
 		// Set CAtegories
