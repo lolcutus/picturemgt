@@ -24,15 +24,15 @@ import ro.cuzma.tools.FileTools;
 import ro.cuzma.tools.OS;
 
 public class PictureDatabase {
-    private CategoryList       categories   = new CategoryList();                      ;
-    private AddressList        addresses    = new AddressList();
-    private Vector<Picture>    pictures     = new Vector<Picture>();
-    static Logger              logger       = Logger.getLogger(PictureDatabase.class);
+    private CategoryList categories = new CategoryList();;
+    private AddressList addresses = new AddressList();
+    private Vector<Picture> pictures = new Vector<Picture>();
+    static Logger logger = Logger.getLogger(PictureDatabase.class);
 
-    private String             root         = "";
-    public File                databaseFile;
-    public final static String TAG_HEAD     = "database";
-    public final static String TAG_ROOT     = "root";
+    private String root = "";
+    public File databaseFile;
+    public final static String TAG_HEAD = "database";
+    public final static String TAG_ROOT = "root";
     public final static String TAG_PICTURES = "Pictures";
 
     /**
@@ -59,15 +59,16 @@ public class PictureDatabase {
         this.root = root;
     }
 
-    public PictureDatabase(File dbFile) throws SAXException, IOException,
+    public PictureDatabase(File dbFile, String root) throws SAXException, IOException,
             ParserConfigurationException {
+        this.root = root;
         load(dbFile);
     }
 
-    public PictureDatabase(String root, String databaseName) {
-        this.databaseFile = new File(root + File.separator + databaseName + ".xml");
-        this.root = root;
-    }
+    // public PictureDatabase(String root, String databaseName) {
+    // this.databaseFile = new File(root + File.separator + databaseName + ".xml");
+    // this.root = root;
+    // }
 
     public void loadDataFromThumbs(File fileFrom) {
 
@@ -85,7 +86,7 @@ public class PictureDatabase {
             traverseACDSee(((Document) node).getDocumentElement());
             break;
         }
-            // print element with attributes
+        // print element with attributes
         case Node.ELEMENT_NODE: {
 
             // System.out.println("node: " + node.getLocalName());
@@ -136,7 +137,7 @@ public class PictureDatabase {
             traverse(((Document) node).getDocumentElement());
             break;
         }
-            // print element with attributes
+        // print element with attributes
         case Node.ELEMENT_NODE: {
 
             // System.out.println("node: " + node.getNodeName());
@@ -164,10 +165,10 @@ public class PictureDatabase {
                     }
                     // pcTmp.addChildren(pcTmp);
                 }
-            } else if (node.getNodeName().equals("root")) {
-                if (node.getChildNodes().item(0) != null) {
-                    this.root = node.getChildNodes().item(0).getNodeValue();
-                }
+                // } else if (node.getNodeName().equals("root")) {
+                // if (node.getChildNodes().item(0) != null) {
+                // this.root = node.getChildNodes().item(0).getNodeValue();
+                // }
             } else {
                 NodeList children = node.getChildNodes();
                 if (children != null) {
@@ -237,17 +238,6 @@ public class PictureDatabase {
         }
     }
 
-    /*
-     * public void save() throws IOException { String filePath = databaseFile.getAbsolutePath();
-     * File tmp = new File(filePath + ".old"); tmp.delete(); databaseFile.renameTo(tmp);
-     * databaseFile.createNewFile(); RandomAccessFile ra = new RandomAccessFile(databaseFile, "rw");
-     * ra.writeBytes("<database>\r\n"); ra.writeBytes("\t<root>" + this.getRoot() + "</root>\r\n");
-     * ra.writeBytes("\t<CategoryList>\r\n"); ra.writeBytes(categories.save("\t\t", null));
-     * ra.writeBytes("\t</CategoryList>\r\n"); ra.writeBytes("\t<Pictures>\r\n"); for (int i = 0; i
-     * < this.pictures.size(); i++) { ra.writeBytes(((Picture) this.pictures.get(i)).toXML("\t\t"));
-     * } ra.writeBytes("\t</Pictures>\r\n"); ra.writeBytes("</database>"); ra.close(); }
-     */
-
     public void save() throws IOException {
         String filePath = databaseFile.getAbsolutePath();
         File tmp = new File(filePath + ".old");
@@ -257,7 +247,7 @@ public class PictureDatabase {
         RandomAccessFile ra = new RandomAccessFile(databaseFile, "rw");
         ra.writeBytes("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         ra.writeBytes("<database>\r\n");
-        ra.write(SpecialToUtf8("\t<root>" + this.getRoot() + "</root>\r\n"));
+        // ra.write(SpecialToUtf8("\t<root>" + this.getRoot() + "</root>\r\n"));
         ra.write(SpecialToUtf8(addresses.toXML("\t")));
         ra.write(SpecialToUtf8(categories.toXML("\t")));
         ra.writeBytes("\t<Pictures>\r\n");

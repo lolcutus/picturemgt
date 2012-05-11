@@ -59,6 +59,11 @@ import ro.cuzma.picturemgt.tree.FoldersNode;
  * CODE CANNOT BE USED LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class PictureManagement extends JFrame {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5618749697592659287L;
+
     {
         // Set Look & Feelmy.
         try {
@@ -68,91 +73,69 @@ public class PictureManagement extends JFrame {
             e.printStackTrace();
         }
     }
-    static Logger           logger         = Logger.getLogger(PictureManagement.class);
-    private JMenuItem       helpMenuItem;
-    private JMenu           jMenuHelp;
-    private JScrollPane     jScrollPaneCategories;
+    static Logger logger = Logger.getLogger(PictureManagement.class);
+    private JMenu jMenuHelp;
+    private JScrollPane jScrollPaneCategories;
     // private JScrollPane jScrollPanePicture;
-    private JSplitPane      jSplitPaneCategories;
-    private JScrollPane     jScrollPanetext;
-    private JMenuItem       jMenuIptcFolder;
-    private JMenuItem       jMenuItemSetName;
-    private JMenuItem       jMenuItemRemoveFolder;
-    private JMenuItem       jMenuItemFolderToACDSee;
-    private JMenuItem       jMenuItemToACDSee;
-    private JMenuItem       jMenuImportACDSee;
-    private JMenuItem       jMenuImportThumbs;
-    private JPanel          jPanelPictures;
-    private JMenuItem       jMenuItemAddCategory;
-    private JMenuItem       jMenuItemFolderToXMP;
-    private JScrollPane     jScrollPanePictures;
-    private JSeparator      jSeparator3;
-    private JSeparator      jSeparator1;
-    private JMenuItem       jMenuItemAddAddress;
-    private JMenu           jMenuTools;
-    private JScrollPane     jScrollPaneAddresses;
-    private JTextArea       jTextAreaData;
-    private DatabaseTree    jPanelTree;
-    private JSplitPane      jSplitPaneH;
-    private JSplitPane      jSplitPaneTreePic;
-    private JSplitPane      jSplitPaneMain;                                            // @jve:decl-index=0:visual-constraint="10,47"
-    private JMenu           jMenuEdit;
-    private JMenuItem       exitMenuItem;
-    private JSeparator      jSeparator2;
-    private JMenuItem       saveAsMenuItem;
-    private JMenuItem       saveMenuItem;
-    private JMenuItem       openFileMenuItem;
-    private JMenuItem       newFileMenuItem;
-    private JMenu           jMenuFile;
-    private JMenuBar        jMenuBarMaster;
+    private JSplitPane jSplitPaneCategories;
+    private JScrollPane jScrollPanetext;
+    private JMenuItem jMenuIptcFolder;
+    private JMenuItem jMenuItemSetName;
+    private JMenuItem jMenuItemRemoveFolder;
+    private JMenuItem jMenuItemFolderToACDSee;
+    private JMenuItem jMenuItemToACDSee;
+    private JPanel jPanelPictures;
+    private JMenuItem jMenuItemAddCategory;
+    private JMenuItem jMenuItemFolderToXMP;
+    private JScrollPane jScrollPanePictures;
+    private JSeparator jSeparator3;
+    private JSeparator jSeparator1;
+    private JMenuItem jMenuItemAddAddress;
+    private JMenu jMenuTools;
+    private JScrollPane jScrollPaneAddresses;
+    private JTextArea jTextAreaData;
+    private DatabaseTree jPanelTree;
+    private JSplitPane jSplitPaneH;
+    private JSplitPane jSplitPaneTreePic;
+    private JSplitPane jSplitPaneMain; // @jve:decl-index=0:visual-constraint="10,47"
+    private JMenu jMenuEdit;
+    private JMenuItem exitMenuItem;
+    private JSeparator jSeparator2;
+    private JMenuItem saveAsMenuItem;
+    private JMenuItem saveMenuItem;
+    private JMenuItem openFileMenuItem;
+    private JMenuItem newFileMenuItem;
+    private JMenu jMenuFile;
+    private JMenuBar jMenuBarMaster;
+
     // private Vector pictures;
     private PictureDatabase picDB;
-    private int             currentColumns = 1;
-    private FoldersNode     currentFN;
-    private int             currentPicSize;
-    private JRadioButton    jRadioButton0;
-    private JRadioButton    jRadioButton5;
-    private JRadioButton    jRadioButton4;
-    private JRadioButton    jRadioButton3;
-    private JRadioButton    jRadioButton2;
-    private JRadioButton    jRadioButton1;
-    private ButtonGroup     buttonGroupRating;
-    private JPanel          jPanelRating;
-    private JPanel          jPanelRatingCat;
-    private JMenuItem       jMenuItemAddFolder;
-    private JMenuItem       jMenuItemRescanCurentFolder;
-    private JTable          jTableCategories;
-    private JTable          jTableAddress;
-    private JMenu           jMenuExport;
-    private JMenuItem       jMenuItemChangeRooot;
-    private CategoryModel   jCategoryModel = new CategoryModel();
-    private AddressModel    jAddressModel  = new AddressModel();
-    private Picture         currentPicture = null;
-    private PictureLabel    curPiclabel    = null;
-    private JPanel          previewPanel   = null;
-    private JLabel          previewLabel   = null;
-    private JButton         jButton        = null;
 
-    /**
-     * This method initializes jButton
-     * 
-     * @return javax.swing.JButton
-     */
-    private JButton getJButton() {
-        if (jButton == null) {
-            jButton = new JButton();
-        }
-        return jButton;
-    }
-
-    /**
-     * Auto-generated main method to display this JFrame
-     */
-    public static void main(String[] args) {
-        PictureManagement inst = new PictureManagement();
-        inst.setVisible(true);
-        // inst.load(new File(args[0]));
-    }
+    private int currentColumns = 1;
+    private FoldersNode currentFN;
+    private int currentPicSize;
+    private JRadioButton jRadioButton0;
+    private JRadioButton jRadioButton5;
+    private JRadioButton jRadioButton4;
+    private JRadioButton jRadioButton3;
+    private JRadioButton jRadioButton2;
+    private JRadioButton jRadioButton1;
+    private ButtonGroup buttonGroupRating;
+    private JPanel jPanelRating;
+    private JPanel jPanelRatingCat;
+    private JMenuItem jMenuItemAddFolder;
+    private JMenuItem jMenuItemRescanCurentFolder;
+    private JTable jTableCategories;
+    private JTable jTableAddress;
+    private JMenu jMenuExport;
+    private JMenuItem jMenuItemChangeRooot;
+    private CategoryModel jCategoryModel = new CategoryModel();
+    private AddressModel jAddressModel = new AddressModel();
+    private Picture currentPicture = null;
+    private PictureLabel curPiclabel = null;
+    private JPanel previewPanel = null;
+    private JLabel previewLabel = null;
+    private JButton jButton = null;
 
     public PictureManagement() {
         super();
@@ -464,7 +447,11 @@ public class PictureManagement extends JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             thFile = chooser.getSelectedFile();
             // System.out.println("aaa");
-            load(thFile);
+            if (picDB != null) {
+                load(thFile, picDB.getRoot());
+            } else {
+                load(thFile, "");
+            }
         }
     }
 
@@ -612,10 +599,10 @@ public class PictureManagement extends JFrame {
 
     }
 
-    public void load(File thFile) {
+    public void load(File thFile, String root) {
 
         try {
-            picDB = new PictureDatabase(thFile);
+            picDB = new PictureDatabase(thFile, root);
             jPanelTree.clear();
             FoldersNode rootF = new FoldersNode(picDB.getRoot(), picDB.getRoot());
             Picture tmp;
@@ -628,7 +615,7 @@ public class PictureManagement extends JFrame {
             this.jCategoryModel.newData(picDB.getCategoriesVector());
             this.jAddressModel.newData(picDB.getAddressesVector());
             this.setTitle("Picture Mangement: " + thFile.getAbsolutePath());
-            RunMe.setDBFile(thFile);
+            RunMe.setInitFile(thFile, picDB.getRoot());
         } catch (Exception e) {
             picDB = null;
             jPanelTree.clear();
@@ -636,7 +623,6 @@ public class PictureManagement extends JFrame {
             this.jAddressModel.newData(null);
             e.printStackTrace();
         }
-
     }
 
     private void reloadTree() {
@@ -692,7 +678,9 @@ public class PictureManagement extends JFrame {
     private void jMenuItemChangeRoootMouseReleased(MouseEvent evt) {
         ChangeRoot cr = new ChangeRoot(this);
         // System.out.println(cr.showDialog());
-        this.picDB.setRoot(cr.showDialog());
+        String picRoot = cr.showDialog();
+        this.picDB.setRoot(picRoot);
+        RunMe.setInitFile(picDB.getDatabaseFile(), picDB.getRoot());
         reloadTree();
     }
 
@@ -1320,7 +1308,7 @@ public class PictureManagement extends JFrame {
                     this.picDB.saveAs(thFile);
                     getTextArea().append("\nDone");
                     this.setTitle("Picture Mangement: " + thFile.getAbsolutePath());
-                    RunMe.setDBFile(thFile);
+                    RunMe.setInitFile(thFile, picDB.getRoot());
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
