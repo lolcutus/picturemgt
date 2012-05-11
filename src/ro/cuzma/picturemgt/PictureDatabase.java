@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,6 +21,7 @@ import ro.cuzma.picturemgt.addresses.Address;
 import ro.cuzma.picturemgt.addresses.AddressList;
 import ro.cuzma.picturemgt.categories.Category;
 import ro.cuzma.picturemgt.categories.CategoryList;
+import ro.cuzma.tools.CalendarTools;
 import ro.cuzma.tools.FileTools;
 import ro.cuzma.tools.OS;
 
@@ -240,9 +242,18 @@ public class PictureDatabase {
 
     public void save() throws IOException {
         String filePath = databaseFile.getAbsolutePath();
-        File tmp = new File(filePath + ".old");
-        tmp.delete();
-        databaseFile.renameTo(tmp);
+
+        String date = CalendarTools.calendarToStringShort(new GregorianCalendar(), ".");
+
+        File bck = new File(filePath + "-" + date + ".bck");
+        if (bck.exists()) {
+            File tmp = new File(filePath + ".old");
+            tmp.delete();
+            databaseFile.renameTo(tmp);
+        } else {
+            databaseFile.renameTo(bck);
+        }
+
         databaseFile.createNewFile();
         RandomAccessFile ra = new RandomAccessFile(databaseFile, "rw");
         ra.writeBytes("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
