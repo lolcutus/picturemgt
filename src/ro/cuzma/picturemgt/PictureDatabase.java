@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.util.GregorianCalendar;
+import java.util.TreeSet;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -262,8 +263,10 @@ public class PictureDatabase {
         ra.write(SpecialToUtf8(addresses.toXML("\t")));
         ra.write(SpecialToUtf8(categories.toXML("\t")));
         ra.writeBytes("\t<Pictures>\r\n");
-        for (int i = 0; i < this.pictures.size(); i++) {
-            ra.write(SpecialToUtf8(((Picture) this.pictures.get(i)).toXML("\t\t")));
+        TreeSet<Picture> ts = new TreeSet<Picture>(this.pictures);
+        java.util.Iterator<Picture> it = ts.iterator();
+        while (it.hasNext()) {
+            ra.write(SpecialToUtf8((it.next()).toXML("\t\t")));
         }
         ra.writeBytes("\t</Pictures>\r\n");
         ra.writeBytes("</database>");

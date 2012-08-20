@@ -46,7 +46,7 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
 import com.drew.metadata.exif.ExifDirectory;
 
-public class Picture {
+public class Picture implements Comparable<Picture> {
     // private String drive;
     private String path;
     private String name;
@@ -129,8 +129,8 @@ public class Picture {
 
     public Picture(String root, File pic) {
         this.root = root;
-        String tmp =pic.getParent().substring(root.length() + 1); 
-        this.path = tmp.replaceAll(File.separatorChar+"", FILE_PATH_SEPARATOR);
+        String tmp = pic.getParent().substring(root.length() + 1);
+        this.path = tmp.replaceAll(File.separatorChar + "", FILE_PATH_SEPARATOR);
         this.name = pic.getName();
     }
 
@@ -567,12 +567,13 @@ public class Picture {
     }
 
     public String getFileFullName() {
-        return  getFilePath ()+ File.separator + this.getName();
+        return getFilePath() + File.separator + this.getName();
     }
+
     public String getFilePathNoRoot() {
-        return this.getPath().replace(FILE_PATH_SEPARATOR,File.separator+"") ;
+        return this.getPath().replace(FILE_PATH_SEPARATOR, File.separator + "");
     }
-    
+
     public String getFilePath() {
         return this.getRoot() + File.separator + getFilePathNoRoot();
     }
@@ -649,7 +650,8 @@ public class Picture {
                 ps.setCountry(this.getAddress().getCountry());
                 writeSomething = true;
             }
-            String dir = this.getRoot() + File.separator + "XMP" + File.separator + this.getFilePathNoRoot();
+            String dir = this.getRoot() + File.separator + "XMP" + File.separator
+                    + this.getFilePathNoRoot();
             File dirXmp = new File(dir);
             if (!dirXmp.exists()) {
                 dirXmp.mkdirs();
@@ -676,6 +678,11 @@ public class Picture {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int compareTo(Picture o) {
+        return this.getName().compareTo(o.getName());
     }
 
 }

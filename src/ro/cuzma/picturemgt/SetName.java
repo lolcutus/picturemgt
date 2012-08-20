@@ -8,7 +8,6 @@ import java.io.File;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -19,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.WindowConstants;
 
 import ro.cuzma.tools.FileTools;
@@ -33,6 +31,11 @@ import ro.cuzma.tools.FileTools;
  * CODE CANNOT BE USED LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class SetName extends javax.swing.JFrame {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -7354578459897502630L;
 
     {
         // Set Look & Feel
@@ -65,7 +68,7 @@ public class SetName extends javax.swing.JFrame {
     private JPanel jPanelMain;
 
     File lastDir = new File("f:\\Multimedia\\Picture");
-    Vector jpgFiles;
+    Vector<DateCreated> jpgFiles;
     int lastIndex = -1;
     String numberPart;
     String textPart;
@@ -183,8 +186,6 @@ public class SetName extends javax.swing.JFrame {
                 jScrollPaneFiles = new JScrollPane();
                 this.getContentPane().add(jScrollPaneFiles, BorderLayout.CENTER);
                 {
-                    ListModel jListPreviewModel = new DefaultComboBoxModel(new String[] {
-                            "Item One", "Item Two" });
                     jListPreview = new java.awt.List();
                     jScrollPaneFiles.setViewportView(jListPreview);
                     // jListPreview.setModel(jListPreviewModel);
@@ -224,24 +225,6 @@ public class SetName extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Auto-generated method for setting the popup menu for BookTableHeaderListener component
-     */
-    private void setComponentPopupMenu(final java.awt.Component parent,
-            final javax.swing.JPopupMenu menu) {
-        parent.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent e) {
-                if (e.isPopupTrigger())
-                    menu.show(parent, e.getX(), e.getY());
-            }
-
-            public void mouseReleased(java.awt.event.MouseEvent e) {
-                if (e.isPopupTrigger())
-                    menu.show(parent, e.getX(), e.getY());
-            }
-        });
-    }
-
     private void jMenuItemBrowseMouseReleased(MouseEvent evt) {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -259,8 +242,8 @@ public class SetName extends javax.swing.JFrame {
                 jTextFieldText.setText(lastDir.getName().substring(tmp + 1));
             }
             jListPreview.removeAll();
-            Vector tmpV = FileTools.getFilesInDir(chooser.getSelectedFile().getAbsolutePath(),
-                    "jpg");
+            Vector<File> tmpV = FileTools.getFilesInDir(
+                    chooser.getSelectedFile().getAbsolutePath(), "jpg");
             for (int i = 0; i < tmpV.size(); i++) {
                 jListPreview.add(((File) tmpV.get(i)).getName());
             }
@@ -277,8 +260,8 @@ public class SetName extends javax.swing.JFrame {
             PictureProperties pp = new PictureProperties();
             jpgFiles = pp.getFiles(lastDir.getAbsolutePath());
             DateCreated dt = null;
-            TreeSet ts = new TreeSet(jpgFiles);
-            java.util.Iterator it = ts.iterator();
+            TreeSet<DateCreated> ts = new TreeSet<DateCreated>(jpgFiles);
+            java.util.Iterator<DateCreated> it = ts.iterator();
             // System.out.println(it.);
             int contor = 1;
             jListPreview.removeAll();
@@ -287,7 +270,7 @@ public class SetName extends javax.swing.JFrame {
                 dt.setNewName(ro.cuzma.picturemgt.Description.newName(dt.getFile().getName(),
                         numberPart, textPart, contor));
                 contor++;
-                jListPreview.add(dt.getCreationDate() + "-" + dt.getFile().getName() + "-"
+                jListPreview.add(dt.toString() + "-" + dt.getFile().getName() + "-"
                         + dt.getNewName());
             }
             // FileTools.getFilesInDir(lastDir.getAbsolutePath(),"jpg");
@@ -312,7 +295,7 @@ public class SetName extends javax.swing.JFrame {
         // jTextFieldText.setText("");
         // jTextFieldPath.setText("");
         jListPreview.removeAll();
-        Vector tmpV = FileTools.getFilesInDir(lastDir.getAbsolutePath(), "jpg");
+        Vector<File> tmpV = FileTools.getFilesInDir(lastDir.getAbsolutePath(), "jpg");
         for (int i = 0; i < tmpV.size(); i++) {
             jListPreview.add(((File) tmpV.get(i)).getName());
         }
